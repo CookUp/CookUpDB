@@ -25,7 +25,7 @@ class CookUpDBServlet(object):
         try:
             in_json=json.loads(web.data())
         except:
-            web.OK()
+            web.internalerror()
             message = "not a valid JSON"
             self.log.error(message)
             return '{"log_msg":message}'
@@ -33,7 +33,8 @@ class CookUpDBServlet(object):
         found_meal = self.matcher.get_meal_offer(in_json['meal'], in_json['location'])
 
         web.OK()
-        return "hmmm... smakelig"#json.dumps(found_meal)
+        self.log.debug('found meals: %s' % found_meal)
+        return json.dumps(found_meal)
 
     def POST(self):
         self.log.debug('post')
@@ -42,7 +43,7 @@ class CookUpDBServlet(object):
         try:
             in_json=json.loads(web.data())
         except:
-            web.OK()
+            web.internalerror()
             message = "not a valid JSON"
             self.log.error(message)
             return '{"log_msg":message}'
@@ -59,12 +60,13 @@ class CookUpDBServlet(object):
         return json.dumps(in_json)
 
     def close_order(self, in_json):
-        self.log.debug('close order: %s' % in_json)
+        order = self.db_mockup.set_order_buyer(in_json['user'],in_json['buyer']) 
+        self.log.debug('closed order: %s' % order)
         
 
     def create_order(self, in_json):
-        self.log.debug('create order: %s' % in_json)
         self.db_mockup.create_order(in_json)
+        self.log.debug('create order: %s' % in_json)
 
 if __name__ == "__main__":
         app = web.application(urls, globals())

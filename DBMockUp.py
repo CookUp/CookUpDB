@@ -1,4 +1,5 @@
 import json
+import pdb
 
 class DBMockUp(object):
 
@@ -14,6 +15,15 @@ class DBMockUp(object):
 
     def get_orders(self):
         return self.data['Orders']
+
+    def set_order_buyer(self,ID,buyer):
+        pdb.set_trace()
+        found = [o for o in self.data['Orders'] if o['id']==int(ID)]
+        if len(found)==0:
+            return False
+        found[0]['buyer']=buyer
+        self.update_db_file()
+        return found[0]
 
     def get_locations(self):
         return self.data['Locations']
