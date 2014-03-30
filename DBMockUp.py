@@ -4,7 +4,7 @@ import pdb
 class DBMockUp(object):
 
     def __init__(self):
-        self.db_filename='/home/volker/Dropbox/CookUp/DB.json'
+        self.db_filename='./DB.json'
         self.data=json.load(open(self.db_filename))
 
     def update_db_file(self):
@@ -17,7 +17,6 @@ class DBMockUp(object):
         return self.data['Orders']
 
     def set_order_buyer(self,ID,buyer):
-        pdb.set_trace()
         found = [o for o in self.data['Orders'] if o['id']==int(ID)]
         if len(found)==0:
             return False
@@ -33,6 +32,7 @@ class DBMockUp(object):
         order['id']=new_id
         self.data['Orders'].append(order)
         self.update_db_file()
+        return order
         
 
 

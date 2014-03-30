@@ -3,22 +3,43 @@ import pdb
 
 class MealMatcher(object):
 
-    def __init__(self):
+    def __init__(self, log):
         self.db = DBMockUp.DBMockUp()
+        self.log = log
 
-    def get_meal_offer(self, meal_name, location):
+    def get_meal_offer(self, meal_name, location, cook):
         # meal not available
+        filter_list = {
+            'meal':meal_name,
+            'location':location,
+            'cook':cook
+        }
         orders=self.db.get_orders()
-        matched_meals = [m for m in orders if m['meal']==self.get_meal_id(meal_name)]
-        if len(matched_meals)==0:
-            return None
+        for k,v in filter_list.items():
+            self.log.debug('filter %s for %s' % (k,v))
+            orders = self.filter_orders(orders,k,v)
+            if len(orders)==0:
+                return []
 
-        # no meal in this location
-        matched_meals = [m for m in matched_meals if m['location']==location]
-        if len(matched_meals)==0:
-            return None
+        return orders
 
-        return matched_meals
+    def filter_orders(self, orders, filter_string, filter_id):
+        self.log.debug('filter %s with %s: %s' %(orders,filter_string, filter_id))
+        # filter is null
+        if not filter_id:
+            return orders
+
+        filtered = []
+        for o in orders:
+            if filter_string not in o.keys():
+                continue
+            elif o[filter_string]!=self.get_meal_id(filter_id):
+                continue
+            elif o['buyer']:
+                continue
+            filtered.append(o)
+
+        return filtered
 
 
     def get_meal_id(self, meal_name):
