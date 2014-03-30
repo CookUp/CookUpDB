@@ -21,6 +21,15 @@ class MealMatcher(object):
             if len(orders)==0:
                 return []
 
+        for i in range(len(orders)):
+            orders[i]['mealName']=self.db.get_name_of('Meals','description',orders[i]['meal'])
+            orders[i]['fileName']=self.db.get_name_of('Meals','name',orders[i]['meal'])
+            orders[i]['cookName']=self.db.get_name_of('Users','name',orders[i]['cook'])
+            orders[i]['locationName']=self.db.get_name_of('Locations','name',orders[i]['location'])
+
+        return orders
+
+
         return orders
 
     def filter_orders(self, orders, filter_string, filter_id):

@@ -16,6 +16,14 @@ class DBMockUp(object):
     def get_orders(self):
         return self.data['Orders']
 
+    def get_name_of(self, field_name, sub_field_name, ID):
+        name = "NO NAME"
+        for m in self.data[field_name]:
+            if m['id']==ID:
+                name=m[sub_field_name]
+                break
+        return name
+
     def set_order_buyer(self,ID,buyer):
         found = [o for o in self.data['Orders'] if o['id']==int(ID)]
         if len(found)==0:

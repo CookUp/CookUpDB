@@ -524,42 +524,42 @@
         {
             "id": 1, 
             "description": "Paella de la iaia", 
-            "name": "Paella"
+            "name": "paella.jpg"
         }, 
         {
             "id": 2, 
             "description": "Garbanzos con anchoas", 
-            "name": "SpaghettiCarbonara"
+            "name": "garbanzosConAnchoas.jpg"
         }, 
         {
             "id": 3, 
             "description": "Spaghetti carbonara", 
-            "name": "SpaghettiCarbonara"
+            "name": "spaghettiCarbonara.jpg"
         }, 
         {
             "id": 4, 
             "description": "Crema de puerros", 
-            "name": "cremaPuerros"
+            "name": "cremaPuerros.jpg"
         }, 
         {
             "id": 5, 
             "description": "Bacalao al pil-pil", 
-            "name": "bacalaoPilPil"
+            "name": "bacalaoPilPil.jpg"
         }, 
         {
             "id": 6, 
             "description": "Tallarines de espinacas con almejas", 
-            "name": "tallarinesEspinacasAlmejas"
+            "name": "tallarinesEspinacasAlmejas.jpg"
         }, 
         {
             "id": 7, 
             "description": "Cerdo con Roquefort y champiniones", 
-            "name": "cerdoRoquefortChampiniones"
+            "name": "cerdoRoquefortChampiniones.jpg"
         }, 
         {
             "id": 8, 
             "description": "Botifarra del valles", 
-            "name": "botifarra"
+            "name": "botifarra.jpg"
         }
     ]
 }
